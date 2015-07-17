@@ -1,0 +1,195 @@
+body {
+	font-family: "RSU";
+	padding-top: 70px;
+	color: #666;
+}
+
+body.en {
+	font-family: "Aller";
+	font-size: 1.1em;
+	line-height: 2.2em;
+}
+
+.navbar-brand {
+	font-size: 1.7em;
+	padding: 13px 15px;
+	color: #FFF;
+	font-weight: bold;
+}
+
+.navbar-green {
+	background-color: #4D8D28;
+	color: #FFF;
+}
+
+.btn {
+	border-width: 0 0 2px 0;
+	border-radius: 2px;
+}
+
+.btn-default {
+	background: #FBFBFB;
+}
+
+#start-over-btn {
+	float: right;
+	color: #555;
+	font-size: 1.1em;
+	margin: 11px 15px 0 0;
+	padding: 5px 10px 1px 10px;
+	border-color: #A5A5A5;
+}
+
+#start-over-btn.en {
+	padding: 5px 10px 5px 10px;
+}
+
+.card {
+	padding: 6px 10px 0 10px;
+	box-shadow: 0 1px 2px #aaa;
+	background: white;
+	border-radius: 3px;
+	font-size: 1.3em;
+	font-weight: normal;
+	margin-bottom: 15px;
+	overflow: hidden;
+}
+
+.card-divider {
+	border-bottom: 1px solid #F0F0F0;
+	margin: 5px -10px 5px -10px;
+	clear: both;
+}
+
+.card > h2 {
+	margin: 0 -10px 10px -10px;
+	padding: 3px 10px 6px 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+	border-bottom: 1px solid #F0F0F0;
+}
+
+.text-green {
+	color: #4D8D28;
+
+}.text-dark-green {
+	color: #35640a;
+}
+
+.origin-title, .destination-title {
+	font-weight: bold;
+	width: 90px;
+	display: block;
+	float: left;
+}
+
+.destination-title {
+	margin-bottom: 5px;
+}
+
+.card > span.fare {
+	display: block;
+	font-size: 3em;
+	font-weight: bold;
+	line-height: 1.3em;
+	text-align: center;
+	margin-top: -5px;
+}
+
+.card > span.fare.en {
+	margin-bottom: 15px;
+}
+
+span.card-detail-toggle {
+	background: #F0F0F0;
+	display: block;
+	margin: 0px -10px 0 -10px;
+	padding: 6px 10px 4px 10px;
+}
+
+span.card-detail-toggle > .fa {
+	float: right;
+	margin-top: 3px;
+	color: #999;
+}
+
+.card ul {
+	list-style: none;
+	padding: 0;
+	margin: 0px -10px 0px -10px;
+	font-weight: 400;
+}
+
+.card li {
+	border-bottom: 1px solid #F0F0F0;
+	padding: 5px 10px 5px 20px;
+}
+
+.card li:last-child {
+	border-bottom: none;
+}
+
+.fare-breakdown {
+	display: none;
+}
+
+ul.fare-breakdown > li > .fare {
+	float: right;
+	font-weight: normal;
+}
+
+small {
+	color: #999;
+	font-size: 0.88em;
+}
+
+.station {
+	margin-bottom: 10px;
+}
+
+.station > .icon {
+	float: left;
+	margin-right: 10px;
+}
+
+.station > .station-name {
+	font-weight: bold;
+	display: block;
+	padding-top: 3px;
+	margin-bottom: -4px;
+}
+
+.station > .direction {
+	font-size: 0.85em;
+}
+
+.connecting {
+	border-width: 0 0 0 3px;
+	border-color: #858585;
+	height: 40px;
+	margin-left: 24px;
+	width: 100%;
+	font-size: 0.83em;
+	padding: 12px 0 0 5px;
+	color: #A8A8A8;
+	margin-top: -10px;
+}
+
+.connecting.ride {
+	border-style: solid;
+}
+
+.connecting.change {
+	border-style: dotted;
+}
+
+//Front page
+.front-page.container {
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.logo {
+	margin-bottom: 20px;
+}

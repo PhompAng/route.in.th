@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/rsu-font.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-green navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed hidden-xs" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand">
+            <i class="fa fa-circle"></i> ข้อมูลการเดินทาง
+          </span>
+          <a id="start-over-btn" class="btn btn-default btn-xs" href="#">
+            เปลี่ยนเส้นทาง
+          </a>
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="card">
+            <span class="origin-title text-dark-green">ต้นทาง</span>BTS สนามกีฬาแห่งชาติ (W1)
+            <div class="card-divider"></div>
+            <span class="destination-title text-dark-green">ปลายทาง</span>MRT ห้วยขวาง (HUI)
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="card">
+            <h2>ค่าโดยสาร</h2>
+            <span class="fare text-dark-green">38 บาท</span>
+            <span id="fare-breakdown-toggle" class="card-detail-toggle">รายละเอียดค่าโดยสาร<i class="fa fa-caret-down"></i></span>
+            <ul class="fare-breakdown">
+              <li>BTS 3 สถานี <small>(อัตราปกติ)</small><span class="fare">22 บาท</span></li>
+              <li>MRT 5 สถานี <small>(อัตรานักศึกษา)</small><span class="fare">16 บาท</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="card">
+            <h2>การเดินทาง</h2>
+            <div class="station">
+              <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
+              <span class="station-name text-dark-green">BTS สนามกีฬาแห่งชาติ (สายสีลม)</span>
+              <span class="direction">ปลายทาง: บางหว้า</span>
+              <div class="clearfix"></div>
+            </div>
+            <div class="connecting ride">1 สถานี</div>
+            <div class="station">
+              <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
+              <span class="station-name text-dark-green">BTS สยาม (สายสุขุมวิท)</span>
+              <span class="direction">ปลายทาง: แบริ่ง</span>
+              <div class="clearfix"></div>
+            </div>
+            <div class="connecting ride">3 สถานี</div>
+            <div class="station">
+              <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
+              <span class="station-name text-dark-green">BTS อโศก (สายสุขุมวิท)</span>
+              <span class="direction">ปลายทาง: แบริ่ง</span>
+              <div class="clearfix"></div>
+            </div>
+            <div class="connecting change">เปลี่ยนระบบ</div>
+            <div class="station">
+              <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
+              <span class="station-name text-dark-green">MRT สุขุมวิท</span>
+              <span class="direction">ปลายทาง: บางซื่อ</span>
+              <div class="clearfix"></div>
+            </div>
+            <div class="connecting ride">3 สถานี</div>
+            <div class="station">
+              <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
+              <span class="station-name text-dark-green">MRT ห้วยขวาง</span>
+              <span class="direction">ปลายทาง: บางซื่อ</span>
+              <div class="clearfix"></div>
+            </div>
+            <span class="card-detail-toggle text-center">แสดงสถานีระหว่างทางทั้งหมด</i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <script>
+      $('#fare-breakdown-toggle').click(function(){
+        $(this).find('.fa').toggleClass('fa-caret-up fa-caret-down');
+        $('.fare-breakdown').slideToggle()
+      })
+    </script>
+  </body>
+</html>
