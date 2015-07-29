@@ -1,4 +1,4 @@
-var full_name = {
+var station_name = {
 
         // MX --> M = MRT, X = Number
 

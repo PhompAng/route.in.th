@@ -18,7 +18,7 @@ app.controller(
         res.success(function(data, status, headers, config) {
             console.log(data);
             $scope.stations = data["route"];
-            $scope.full_name = full_name;
+            $scope.station_name = station_name;
             arl_cnt = 0;
             bts_cnt = 0;
             mrt_cnt = 0;
