@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="Route">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body ng-controller="RouteController">
     <nav class="navbar navbar-green navbar-fixed-top">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -42,12 +42,21 @@
     </nav>
 
     <div class="container">
+
       <div class="row">
         <div class="col-xs-12">
           <div class="card">
-            <span class="origin-title text-dark-green">ต้นทาง</span>BTS สนามกีฬาแห่งชาติ (W1)
+            {{response}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="card">
+            <span class="origin-title text-dark-green">ต้นทาง</span>BTS สนามกีฬาแห่งชาติ (W1) {{origin}}
             <div class="card-divider"></div>
-            <span class="destination-title text-dark-green">ปลายทาง</span>MRT ห้วยขวาง (HUI)
+            <span class="destination-title text-dark-green">ปลายทาง</span>MRT ห้วยขวาง (HUI) {{destination}}
           </div>
         </div>
       </div>
@@ -56,11 +65,12 @@
         <div class="col-xs-12">
           <div class="card">
             <h2>ค่าโดยสาร</h2>
-            <span class="fare text-dark-green">38 บาท</span>
+            <span class="fare text-dark-green">38 บาท {{total}}</span>
             <span id="fare-breakdown-toggle" class="card-detail-toggle">รายละเอียดค่าโดยสาร<i class="fa fa-caret-down"></i></span>
             <ul class="fare-breakdown">
-              <li>BTS 3 สถานี <small>(อัตราปกติ)</small><span class="fare">22 บาท</span></li>
-              <li>MRT 5 สถานี <small>(อัตรานักศึกษา)</small><span class="fare">16 บาท</span></li>
+              <li>ARL 0 สถานี {{arl_cnt}}<small>(อัตราปกติ)</small><span class="fare">0 บาท {{arl_fare}}</span></li>
+              <li>BTS 3 สถานี {{bts_cnt}}<small>(อัตราปกติ)</small><span class="fare">22 บาท {{bts_fare}}</span></li>
+              <li>MRT 5 สถานี {{mrt_cnt}}<small>(อัตรานักศึกษา)</small><span class="fare">16 บาท {{mrt_fare}}</span></li>
             </ul>
           </div>
         </div>
@@ -108,12 +118,30 @@
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="card">
+            <h2>การเดินทาง</h2>
+            <div class="station" ng-repeat="station in stations">
+              <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
+              <span class="station-name text-dark-green">{{station}}</span>
+              <span class="direction">ปลายทาง: บางหว้า</span>
+              <div class="clearfix"></div>
+              <div class="connecting ride">3 สถานี</div>
+            </div>
+            <span class="card-detail-toggle text-center">แสดงสถานีระหว่างทางทั้งหมด</i></span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/main.js"></script>
 
     <script>
       $('#fare-breakdown-toggle').click(function(){
