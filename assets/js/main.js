@@ -1,3 +1,5 @@
+$.getScript("assets/js/dict.js", function(){});
+
 var app = angular.module("Route", []);
 app.controller(
     "RouteController", ['$scope', '$http', function($scope, $http) {
@@ -16,6 +18,7 @@ app.controller(
         res.success(function(data, status, headers, config) {
             console.log(data);
             $scope.stations = data["route"];
+            $scope.full_name = full_name;
             arl_cnt = 0;
             bts_cnt = 0;
             mrt_cnt = 0;

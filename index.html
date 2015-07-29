@@ -54,9 +54,9 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="card">
-            <span class="origin-title text-dark-green">ต้นทาง</span>BTS สนามกีฬาแห่งชาติ (W1) {{origin}}
+            <span class="origin-title text-dark-green">ต้นทาง</span>BTS สนามกีฬาแห่งชาติ (W1) {{full_name[origin]["TH"]}} ({{origin}})
             <div class="card-divider"></div>
-            <span class="destination-title text-dark-green">ปลายทาง</span>MRT ห้วยขวาง (HUI) {{destination}}
+            <span class="destination-title text-dark-green">ปลายทาง</span>MRT ห้วยขวาง (HUI) {{full_name[destination]["TH"]}} ({{destination}})
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@
             <h2>การเดินทาง</h2>
             <div class="station" ng-repeat="station in stations">
               <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
-              <span class="station-name text-dark-green">{{station}}</span>
+              <span class="station-name text-dark-green">{{full_name[station]["TH"]}} ({{station}})</span>
               <span class="direction">ปลายทาง: บางหว้า</span>
               <div class="clearfix"></div>
               <div class="connecting ride">3 สถานี</div>
