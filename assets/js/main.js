@@ -7,8 +7,8 @@ app.controller(
             method: "POST",
             url: "http://127.0.0.1:8000/calculate",
             data: {
-                    origin: "A1",
-                    destination: "BE4",
+                    origin: "BW1",
+                    destination: "M8",
                     card_type_bts: "0",
                     card_type_mrt: "0",
                     card_type_arl: "0"
