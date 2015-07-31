@@ -3,6 +3,8 @@ $.getScript("assets/js/dict.js", function(){});
 var app = angular.module("Route", []);
 app.controller(
     "RouteController", ['$scope', '$http', function($scope, $http) {
+        $scope.full_route = true;
+
         var aaa = {
             method: "POST",
             url: "http://127.0.0.1:8000/calculate",
@@ -26,7 +28,6 @@ app.controller(
             $scope.response = data;
             $scope.origin = data["origin"];
             $scope.destination = data["destination"];
-            $scope.total = data["fare"]["total"];
 
             $.each(data["route"], function(i, val) {
                 if (val.indexOf("A") > -1) {
@@ -42,12 +43,13 @@ app.controller(
             $scope.bts_cnt = bts_cnt;
             $scope.mrt_cnt = mrt_cnt;
 
-            $scope.arl_fare = data["fare"]["ARL"];
-            $scope.bts_fare = data["fare"]["BTS"];
-            $scope.mrt_fare = data["fare"]["MRT"];
         });
         res.error(function(data, status, headers, config) {
             $scope.response = JSON.stringify({data: data});
         });
+
+        $scope.toggleRoute = function() {
+            $scope.full_route = $scope.full_route === false ? true : false;
+        };
     }]
 );
