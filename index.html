@@ -149,7 +149,8 @@
                 <span class="direction">ปลายทาง: บางหว้า</span>
                 <div class="clearfix"></div>
               </div>
-              <div class="connecting ride" ng-if="!$last && stations[$index][0] == stations[$index+1][0]">$placeholder สถานี</div>
+              <div class="connecting ride" ng-if="full_route && !$last && stations[$index][0] == stations[$index+1][0]">1 สถานี</div>
+              <div class="connecting ride" ng-if="!full_route && !$last && stations[$index][0] == stations[$index+1][0]">{{station_cnt[station]}} สถานี</div>
               <div class="connecting change" ng-if="!$last && stations[$index][0] != stations[$index+1][0]">เปลี่ยนระบบ</div>
             </div>
             <span class="card-detail-toggle text-center" ng-click="toggleRoute()">แสดงสถานีระหว่างทางทั้งหมด</i></span>
