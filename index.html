@@ -45,10 +45,10 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <div class="card"> <!--TODO add code-->
-            <span class="origin-title text-dark-green">ต้นทาง</span>{{response["origin"]["th"]}} (code)
+          <div class="card">
+            <span class="origin-title text-dark-green">ต้นทาง</span>{{response["origin"]["th"]}} ({{response["origin"]["code"]}})
             <div class="card-divider"></div>
-            <span class="destination-title text-dark-green">ปลายทาง</span>{{response["destination"]["th"]}} (code)
+            <span class="destination-title text-dark-green">ปลายทาง</span>{{response["destination"]["th"]}} ({{response["destination"]["code"]}})
           </div>
         </div>
       </div>
@@ -59,10 +59,10 @@
             <h2>ค่าโดยสาร</h2>
             <span class="fare text-dark-green">{{response["fare"]["total"]}} บาท</span>
             <span id="fare-breakdown-toggle" class="card-detail-toggle">รายละเอียดค่าโดยสาร<i class="fa fa-caret-down"></i></span>
-            <ul class="fare-breakdown"> <!--TODO card_type lang-->
-              <li>ARL {{arl_cnt}} สถานี <small>(อัตราปกติ)</small><span class="fare">{{response["fare"]["ARL"]}} บาท</span></li>
-              <li>BTS {{bts_cnt}} สถานี <small>(อัตราปกติ)</small><span class="fare">{{response["fare"]["BTS"]}} บาท</span></li>
-              <li>MRT {{mrt_cnt}} สถานี <small>(อัตรานักศึกษา)</small><span class="fare">{{response["fare"]["MRT"]}} บาท</span></li>
+            <ul class="fare-breakdown">
+              <li>ARL {{arl_cnt}} สถานี <small>({{response["card_type_arl"]["th"]}})</small><span class="fare">{{response["fare"]["ARL"]}} บาท</span></li>
+              <li>BTS {{bts_cnt}} สถานี <small>({{response["card_type_bts"]["th"]}})</small><span class="fare">{{response["fare"]["BTS"]}} บาท</span></li>
+              <li>MRT {{mrt_cnt}} สถานี <small>({{response["card_type_mrt"]["th"]}})</small><span class="fare">{{response["fare"]["MRT"]}} บาท</span></li>
             </ul>
           </div>
         </div>
