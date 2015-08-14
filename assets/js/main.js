@@ -1,7 +1,7 @@
 var app = angular.module("Route", []);
 app.controller(
     "RouteController", ['$scope', '$http', function($scope, $http) {
-        $scope.full_route = true;
+        $scope.full_route = false;
 
         var aaa = {
             method: "POST",
