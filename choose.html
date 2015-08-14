@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/css/rsu-font.css">
     <link rel="stylesheet" href="assets/css/aller-font.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/select2/select2.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -25,65 +26,37 @@
     <div class="front-page container">
       <div class="row">
         <div class="col-xs-12 text-center">
-          <img src="http://placehold.it/150x150" class="img-circle logo">
-          <h1>Route.in.th</h1>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="card">
-            <h2>ค่าโดยสาร</h2>
-            <span class="fare text-dark-green">38 บาท</span>
-            <span id="fare-breakdown-toggle" class="card-detail-toggle">รายละเอียดค่าโดยสาร<i class="fa fa-caret-down"></i></span>
-            <ul class="fare-breakdown">
-              <li>BTS 3 สถานี <small>(อัตราปกติ)</small><span class="fare">22 บาท</span></li>
-              <li>MRT 5 สถานี <small>(อัตรานักศึกษา)</small><span class="fare">16 บาท</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="card">
-            <h2>การเดินทาง</h2>
-            <div class="station">
-              <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
-              <span class="station-name text-dark-green">BTS สนามกีฬาแห่งชาติ (สายสีลม)</span>
-              <span class="direction">ปลายทาง: บางหว้า</span>
-              <div class="clearfix"></div>
+          <img src="http://placehold.it/120x120" class="img-circle logo">
+          <h1 class="logo">Route.in.th</h1>
+          <form action="">
+            <div class="form-group">
+              <select class="form-control" name="origin" id="origin-selector" style="width:100%">
+                <option></option>
+                <optgroup label="รถไฟฟ้ามหานคร (MRT)">
+                  <option value="M1">บางซื่อ</option>
+                  <option value="M2">กำแพงเพชร</option>
+                  <option value="M3">สวนจตุจักร</option>
+                  <option value="M4">พหลโยธิน</option>
+                  <option value="M5">BTS สนามกีฬาแห่งชาติ (W1)</option>
+                </optgroup>
+              </select>
             </div>
-            <div class="connecting ride">1 สถานี</div>
-            <div class="station">
-              <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
-              <span class="station-name text-dark-green">BTS สยาม (สายสุขุมวิท)</span>
-              <span class="direction">ปลายทาง: แบริ่ง</span>
-              <div class="clearfix"></div>
+            <div class="form-group">
+              <select class="form-control" name="destination" id="destination-selector" style="width:100%">
+                <option></option>
+                <optgroup label="รถไฟฟ้ามหานคร (MRT)">
+                  <option value="M1">บางซื่อ</option>
+                  <option value="M2">กำแพงเพชร</option>
+                  <option value="M3">สวนจตุจักร</option>
+                  <option value="M4">พหลโยธิน</option>
+                  <option value="M5">BTS สนามกีฬาแห่งชาติ (W1)</option>
+                </optgroup>
+              </select>
             </div>
-            <div class="connecting ride">3 สถานี</div>
-            <div class="station">
-              <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
-              <span class="station-name text-dark-green">BTS อโศก (สายสุขุมวิท)</span>
-              <span class="direction">ปลายทาง: แบริ่ง</span>
-              <div class="clearfix"></div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-block" style="font-size: 1.3em">คำนวณเส้นทาง</button>
             </div>
-            <div class="connecting change">เปลี่ยนระบบ</div>
-            <div class="station">
-              <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
-              <span class="station-name text-dark-green">MRT สุขุมวิท</span>
-              <span class="direction">ปลายทาง: บางซื่อ</span>
-              <div class="clearfix"></div>
-            </div>
-            <div class="connecting ride">3 สถานี</div>
-            <div class="station">
-              <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
-              <span class="station-name text-dark-green">MRT ห้วยขวาง</span>
-              <span class="direction">ปลายทาง: บางซื่อ</span>
-              <div class="clearfix"></div>
-            </div>
-            <span class="card-detail-toggle text-center">แสดงสถานีระหว่างทางทั้งหมด</i></span>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -92,12 +65,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/select2/select2.min.js"></script>
 
     <script>
       $('#fare-breakdown-toggle').click(function(){
         $(this).find('.fa').toggleClass('fa-caret-up fa-caret-down');
         $('.fare-breakdown').slideToggle()
       })
+
+      $('#origin-selector').select2({
+        placeholder: "เลือกสถานีต้นทาง",
+        minimumResultsForSearch: Infinity
+      });
+
+      $('#destination-selector').select2({
+        placeholder: "เลือกสถานีปลายทาง",
+        minimumResultsForSearch: Infinity
+      });
     </script>
   </body>
 </html>
