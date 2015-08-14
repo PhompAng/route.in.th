@@ -123,17 +123,18 @@
         <div class="col-xs-12">
           <div class="card">
             <h2>การเดินทาง</h2>
-            <div ng-repeat="station in stations">
+            <div ng-repeat="station in object_route" ng-show="full_route || $first || $last || stations[$index][0] != stations[$index+1][0] || stations[$index][0] != stations[$index-1][0] || (station['code']=='BCEN' && !bts_same_line)">
               <div class="station">
                 <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
-                <span class="station-name text-dark-green">{{station_name[station]["TH"]}} ({{station}})</span>
-                <span class="direction">ปลายทาง: บางหว้า</span>
+                <span class="station-name text-dark-green">{{station["name"]["th"]}} <span ng-if="station['code'][0] == 'B'">(สาย{{station["line"]["th"]}})</span> ({{station["code"]}})</span>
+                <span class="direction">ปลายทาง: {{station["heading"]["th"]}}</span>
                 <div class="clearfix"></div>
               </div>
-              <div class="connecting ride" ng-if="!$last && stations[$index][0] == stations[$index+1][0]">1 สถานี</div>
+              <div class="connecting ride" ng-if="full_route && !$last && stations[$index][0] == stations[$index+1][0]">1 สถานี</div>
+              <div class="connecting ride" ng-if="!full_route && !$last && stations[$index][0] == stations[$index+1][0]">{{station["station_cnt"]}} สถานี</div>
               <div class="connecting change" ng-if="!$last && stations[$index][0] != stations[$index+1][0]">เปลี่ยนระบบ</div>
             </div>
-            <span class="card-detail-toggle text-center">แสดงสถานีระหว่างทางทั้งหมด</i></span>
+            <span class="card-detail-toggle text-center" ng-click="toggleRoute()">แสดงสถานีระหว่างทางทั้งหมด</i></span>
           </div>
         </div>
       </div>

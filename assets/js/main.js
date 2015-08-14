@@ -10,7 +10,7 @@ app.controller(
             url: "http://127.0.0.1:8000/calculate",
             data: {
                     origin: "A1",
-                    destination: "BE2",
+                    destination: "BW1",
                     card_type_bts: "0",
                     card_type_mrt: "0",
                     card_type_arl: "0"
@@ -22,6 +22,8 @@ app.controller(
             $scope.stations = data["route"];
             $scope.station_name = station_name;
 
+            $scope.object_route = data["object_route"];
+
             $scope.response = data;
             $scope.origin = data["origin"];
             $scope.destination = data["destination"];
@@ -31,6 +33,7 @@ app.controller(
             bts_cnt = 0;
             mrt_cnt = 0;
             station_cnt[data["route"][0]] = 0;
+            $scope.bts_same_line = data["BTS_same_line"];
             $scope.same_line = false;
             var tmp = data["route"][0];
 
