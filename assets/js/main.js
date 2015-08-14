@@ -1,5 +1,3 @@
-$.getScript("assets/js/dict.js", function(){});
-
 var app = angular.module("Route", []);
 app.controller(
     "RouteController", ['$scope', '$http', function($scope, $http) {
