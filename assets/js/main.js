@@ -1,4 +1,18 @@
-var app = angular.module("Route", []);
+var app = angular.module("Route", ['ngRoute', 'ngAnimate']);
+app.config(function($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'index_th.html',
+            controller : 'RouteController'
+        })
+        .when('/en', {
+            templateUrl: 'index_en.html',
+            controller : 'RouteController'
+        })
+        .otherwise({
+            redirectTo: '/'
+        });
+});
 app.controller(
     "RouteController", ['$scope', '$http', function($scope, $http) {
         $scope.full_route = false;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="Route">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,8 +10,9 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/rsu-font.css">
+    <link rel="stylesheet" href="assets/css/aller-font.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style-en.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,8 +20,29 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+      .viewAnimate.ng-enter{
+        -webkit-transition:all 1s ease 0.7s;
+        transition:all 1s ease 0.7s;
+      }
+
+      .viewAnimate.ng-leave {
+        -webkit-transition: all 0.5s ease 0s;
+        transition: all 0.5s ease 0s;
+      }
+
+      .viewAnimate.ng-enter,
+      .viewAnimate.ng-leave.ng-leave-active {
+        opacity:0;
+      }
+
+      .viewAnimate.ng-leave,
+      .viewAnimate.ng-enter.ng-enter-active {
+        opacity:1;
+      }
+    </style>
   </head>
-  <body ng-controller="RouteController">
+  <body ng-app="Route">
     <nav class="navbar navbar-green navbar-fixed-top">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -32,61 +54,20 @@
             <span class="icon-bar"></span>
           </button>
           <span class="navbar-brand">
-            <i class="fa fa-circle"></i> ข้อมูลการเดินทาง
+            <i class="fa fa-circle"></i> Trip Detail
           </span>
           <a id="start-over-btn" class="btn btn-default btn-xs" href="#">
-            เปลี่ยนเส้นทาง
+            Edit trip
           </a>
+          <a id="start-over-btn" href="#/" class="btn btn-default btn-xs">TH</a>
+          <a id="start-over-btn" href="#/en" class="btn btn-default btn-xs">EN</a>
         </div>
       </div><!-- /.container-fluid -->
     </nav>
 
     <div class="container">
 
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="card">
-            <span class="origin-title text-dark-green">ต้นทาง</span>{{response["origin"]["th"]}} ({{response["origin"]["code"]}})
-            <div class="card-divider"></div>
-            <span class="destination-title text-dark-green">ปลายทาง</span>{{response["destination"]["th"]}} ({{response["destination"]["code"]}})
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="card">
-            <h2>ค่าโดยสาร</h2>
-            <span class="fare text-dark-green">{{response["fare"]["total"]}} บาท</span>
-            <span id="fare-breakdown-toggle" class="card-detail-toggle">รายละเอียดค่าโดยสาร<i class="fa fa-caret-down"></i></span>
-            <ul class="fare-breakdown">
-              <li>ARL {{arl_cnt}} สถานี <small>({{response["card_type_arl"]["th"]}})</small><span class="fare">{{response["fare"]["ARL"]}} บาท</span></li>
-              <li>BTS {{bts_cnt}} สถานี <small>({{response["card_type_bts"]["th"]}})</small><span class="fare">{{response["fare"]["BTS"]}} บาท</span></li>
-              <li>MRT {{mrt_cnt}} สถานี <small>({{response["card_type_mrt"]["th"]}})</small><span class="fare">{{response["fare"]["MRT"]}} บาท</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="card">
-            <h2>การเดินทาง</h2>
-            <div ng-repeat="station in object_route" ng-show="full_route || $first || $last || stations[$index][0] != stations[$index+1][0] || stations[$index][0] != stations[$index-1][0] || (station['code']=='BCEN' && !bts_same_line)">
-              <div class="station">
-                <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
-                <span class="station-name text-dark-green">{{station["name"]["th"]}} <span ng-if="station['code'][0] == 'B'">(สาย{{station["line"]["th"]}})</span> ({{station["code"]}})</span>
-                <span class="direction">ปลายทาง: {{station["heading"]["th"]}}</span>
-                <div class="clearfix"></div>
-              </div>
-              <div class="connecting ride" ng-if="full_route && !$last && stations[$index][0] == stations[$index+1][0]">1 สถานี</div>
-              <div class="connecting ride" ng-if="!full_route && !$last && stations[$index][0] == stations[$index+1][0]">{{station["station_cnt"]}} สถานี</div>
-              <div class="connecting change" ng-if="!$last && stations[$index][0] != stations[$index+1][0]">เปลี่ยนระบบ</div>
-            </div>
-            <span class="card-detail-toggle text-center" ng-click="toggleRoute()">แสดงสถานีระหว่างทางทั้งหมด</i></span>
-          </div>
-        </div>
-      </div>
+      <div ng-view class="viewAnimate"></div>
 
     </div>
 
@@ -94,7 +75,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.4/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.4/angular-route.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.4/angular-animate.min.js"></script>
     <script src="assets/js/main.js"></script>
 
     <script>
