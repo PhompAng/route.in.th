@@ -1,7 +1,7 @@
 var app = angular.module("Route", ['ngRoute', 'ngAnimate']);
 app.config(function($routeProvider) {
     $routeProvider
-        .when('/', {
+        .when('/th', {
             templateUrl: 'index_th.html',
             controller : 'RouteController'
         })
@@ -10,12 +10,13 @@ app.config(function($routeProvider) {
             controller : 'RouteController'
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/th'
         });
 });
 app.controller(
     "RouteController", ['$scope', '$http', function($scope, $http) {
         $scope.full_route = false;
+        $scope.ui_lang = "th";
 
         var aaa = {
             method: "POST",
@@ -54,6 +55,10 @@ app.controller(
 
         $scope.toggleRoute = function() {
             $scope.full_route = $scope.full_route === false ? true : false;
+        };
+
+        $scope.toggleLang = function() {
+            $scope.ui_lang = $scope.ui_lang === "th" ? "en" : "th";
         };
     }]
 );

@@ -42,27 +42,30 @@
       }
     </style>
   </head>
-  <body ng-app="Route">
-    <nav class="navbar navbar-green navbar-fixed-top">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed hidden-xs" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <span class="navbar-brand">
-            <i class="fa fa-circle"></i> Trip Detail
-          </span>
-          <a id="start-over-btn" class="btn btn-default btn-xs" href="#">
+  <body ng-app="Route" ng-controller="RouteController">
+    <nav class="navbar navbar-green navbar-fixed-top" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <span class="navbar-brand">
+          <i class="fa fa-circle"></i> Trip Detail
+        </span>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li><a id="start-over-btn" class="btn btn-default btn-xs" href="#">
             Edit trip
-          </a>
-          <a id="start-over-btn" href="#/" class="btn btn-default btn-xs">TH</a>
-          <a id="start-over-btn" href="#/en" class="btn btn-default btn-xs">EN</a>
-        </div>
-      </div><!-- /.container-fluid -->
+          </a></li>
+          <li><a id="start-over-btn" ng-click="toggleLang()" href="#/{{ui_lang}}" class="btn btn-default btn-xs">{{ui_lang}}</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
     </nav>
 
     <div class="container">
