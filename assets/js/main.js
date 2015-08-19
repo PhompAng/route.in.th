@@ -1,0 +1,73 @@
+var app = angular.module("Route", ['ngRoute', 'ngAnimate']);
+app.config(function($routeProvider) {
+    $routeProvider
+        .when('/th', {
+            templateUrl: 'index_th.html',
+            controller : 'RouteController'
+        })
+        .when('/en', {
+            templateUrl: 'index_en.html',
+            controller : 'RouteController'
+        })
+        .otherwise({
+            redirectTo: '/th'
+        });
+});
+
+app.controller('IndexController', ["$scope", function($scope){
+    $scope.ui_lang = "th";
+
+    $scope.trip_detail = {"th": "ข้อมูลการเดินทาง",
+                        "en": "Trip Detail"};
+
+    $scope.edit_trip = {"th": "เปลี่ยนเส้นทาง",
+                        "en": "Edit Trip"};
+
+    $scope.toggleLang = function() {
+        $scope.ui_lang = $scope.ui_lang === "th" ? "en" : "th";
+    };
+}]);
+app.controller(
+    "RouteController", ['$scope', '$http', function($scope, $http) {
+        $scope.full_route = false;
+
+        var input_data = {
+            method: "POST",
+            url: "http://127.0.0.1:8000/calculate",
+            data: {
+                    origin: "A1",
+                    destination: "BW1",
+                    card_type_bts: "0",
+                    card_type_mrt: "0",
+                    card_type_arl: "0"
+                }
+        };
+        var res = $http(input_data);
+        res.success(function(data, status, headers, config) {
+            $scope.response = data;
+            $scope.object_route = data["object_route"];
+            $scope.bts_same_line = data["BTS_same_line"];
+
+            $scope.arl_cnt = 0;
+            $scope.bts_cnt = 0;
+            $scope.mrt_cnt = 0;
+
+            $.each(data["route"], function(i, val) {
+                if (val.indexOf("A") > -1) {
+                    $scope.arl_cnt += 1;
+                } else if (val.indexOf("B") > -1) {
+                    $scope.bts_cnt += 1;
+                } else if (val.indexOf("M") > -1) {
+                    $scope.mrt_cnt += 1;
+                }
+            });
+        });
+        res.error(function(data, status, headers, config) {
+            alert(JSON.stringify({data: data}));
+        });
+
+        $scope.toggleRoute = function() {
+            $scope.full_route = $scope.full_route === false ? true : false;
+        };
+    }]
+);
