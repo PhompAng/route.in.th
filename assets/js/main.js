@@ -13,12 +13,25 @@ app.config(function($routeProvider) {
             redirectTo: '/th'
         });
 });
+
+app.controller('IndexController', ["$scope", function($scope){
+    $scope.ui_lang = "th";
+
+    $scope.trip_detail = {"th": "ข้อมูลการเดินทาง",
+                        "en": "Trip Detail"};
+
+    $scope.edit_trip = {"th": "เปลี่ยนเส้นทาง",
+                        "en": "Edit Trip"};
+
+    $scope.toggleLang = function() {
+        $scope.ui_lang = $scope.ui_lang === "th" ? "en" : "th";
+    };
+}]);
 app.controller(
     "RouteController", ['$scope', '$http', function($scope, $http) {
         $scope.full_route = false;
-        $scope.ui_lang = "th";
 
-        var aaa = {
+        var input_data = {
             method: "POST",
             url: "http://127.0.0.1:8000/calculate",
             data: {
@@ -29,7 +42,7 @@ app.controller(
                     card_type_arl: "0"
                 }
         };
-        var res = $http(aaa);
+        var res = $http(input_data);
         res.success(function(data, status, headers, config) {
             $scope.response = data;
             $scope.object_route = data["object_route"];
@@ -50,15 +63,11 @@ app.controller(
             });
         });
         res.error(function(data, status, headers, config) {
-            $scope.response = JSON.stringify({data: data});
+            alert(JSON.stringify({data: data}));
         });
 
         $scope.toggleRoute = function() {
             $scope.full_route = $scope.full_route === false ? true : false;
-        };
-
-        $scope.toggleLang = function() {
-            $scope.ui_lang = $scope.ui_lang === "th" ? "en" : "th";
         };
     }]
 );
