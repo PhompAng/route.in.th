@@ -42,3 +42,9 @@
     </div>
   </div>
 </div>
+<script>
+  $('#fare-breakdown-toggle').click(function(){
+    $(this).find('.fa').toggleClass('fa-caret-up fa-caret-down');
+    $('.fare-breakdown').slideToggle()
+  })
+</script>

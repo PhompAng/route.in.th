@@ -1,21 +1,107 @@
-var app = angular.module("Route", ['ngRoute', 'ngAnimate']);
+var app = angular.module('Route', ['ngRoute', 'ngAnimate']);
 app.config(function($routeProvider) {
     $routeProvider
+        .when('/', {
+            templateUrl: 'choose.html',
+            controller: 'ChooseController',
+            resolve: {
+                "ifHome": function($q, $timeout) {
+                    var tmp = $q.defer();
+                    $timeout(function(){
+                        tmp.resolve({
+                            data: function() {
+                                return "/";
+                            }
+                        });
+                    }, 100);
+                    return tmp.promise;
+                }
+            }
+        })
         .when('/th', {
             templateUrl: 'index_th.html',
-            controller : 'RouteController'
+            controller : 'RouteController',
+            resolve: {
+                "ifHome": function($q, $timeout) {
+                    var tmp = $q.defer();
+                    $timeout(function(){
+                        tmp.resolve({
+                            data: function() {
+                                return "/th";
+                            }
+                        });
+                    }, 100);
+                    return tmp.promise;
+                }
+            }
         })
         .when('/en', {
             templateUrl: 'index_en.html',
-            controller : 'RouteController'
+            controller : 'RouteController',
+            resolve: {
+                "ifHome": function($q, $timeout) {
+                    var tmp = $q.defer();
+                    $timeout(function(){
+                        tmp.resolve({
+                            data: function() {
+                                return "/th";
+                            }
+                        });
+                    }, 100);
+                    return tmp.promise;
+                }
+            }
         })
         .otherwise({
-            redirectTo: '/th'
+            redirectTo: '/'
         });
 });
 
-app.controller('IndexController', ["$scope", function($scope){
+app.factory('InputFactory', function(){
+    var input_data = {
+            method: "POST",
+            url: "http://127.0.0.1:8000/calculate",
+            data: {
+                    origin: "A1",
+                    destination: "BW1",
+                    card_type_bts: "0",
+                    card_type_mrt: "0",
+                    card_type_arl: "0"
+                }
+        };
+
+    var setOrigin = function(origin) {
+        input_data["data"]["origin"] = origin;
+    };
+
+    var setDestination = function(destination) {
+        input_data["data"]["destination"] = destination;
+    };
+
+    var getInput = function() {
+        return input_data;
+    };
+
+    return {
+        setOrigin: setOrigin,
+        setDestination: setDestination,
+        getInput: getInput
+    };
+
+});
+
+app.controller('ChooseController', ['$rootScope', '$scope', '$location', 'InputFactory', 'ifHome', function($rootScope, $scope, $location, InputFactory, ifHome){
+    $rootScope.ifHome = ifHome.data() == "/";
+
+    $scope.submit = function() {
+        InputFactory.setOrigin($scope.input_origin);
+        InputFactory.setDestination($scope.input_destination);
+        $location.path('th');
+    };
+}]);
+app.controller('IndexController', ['$rootScope', '$scope', '$location', function($rootScope, $scope, $location){
     $scope.ui_lang = "th";
+    $rootScope.ifHome = "/";
 
     $scope.trip_detail = {"th": "ข้อมูลการเดินทาง",
                         "en": "Trip Detail"};
@@ -27,21 +113,12 @@ app.controller('IndexController', ["$scope", function($scope){
         $scope.ui_lang = $scope.ui_lang === "th" ? "en" : "th";
     };
 }]);
-app.controller(
-    "RouteController", ['$scope', '$http', function($scope, $http) {
+app.controller("RouteController", ['$rootScope', '$scope', '$http', 'InputFactory', 'ifHome', function($rootScope, $scope, $http, InputFactory, ifHome) {
         $scope.full_route = false;
+        $rootScope.ifHome = ifHome.data() == "/";
 
-        var input_data = {
-            method: "POST",
-            url: "http://127.0.0.1:8000/calculate",
-            data: {
-                    origin: "A1",
-                    destination: "BW1",
-                    card_type_bts: "0",
-                    card_type_mrt: "0",
-                    card_type_arl: "0"
-                }
-        };
+        input_data = InputFactory.getInput();
+
         var res = $http(input_data);
         res.success(function(data, status, headers, config) {
             $scope.response = data;
