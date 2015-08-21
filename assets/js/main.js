@@ -3,54 +3,15 @@ app.config(function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'choose.html',
-            controller: 'ChooseController',
-            resolve: {
-                "ifHome": function($q, $timeout) {
-                    var tmp = $q.defer();
-                    $timeout(function(){
-                        tmp.resolve({
-                            data: function() {
-                                return "/";
-                            }
-                        });
-                    }, 100);
-                    return tmp.promise;
-                }
-            }
+            controller: 'ChooseController'
         })
         .when('/th', {
             templateUrl: 'index_th.html',
-            controller : 'RouteController',
-            resolve: {
-                "ifHome": function($q, $timeout) {
-                    var tmp = $q.defer();
-                    $timeout(function(){
-                        tmp.resolve({
-                            data: function() {
-                                return "/th";
-                            }
-                        });
-                    }, 100);
-                    return tmp.promise;
-                }
-            }
+            controller : 'RouteController'
         })
         .when('/en', {
             templateUrl: 'index_en.html',
-            controller : 'RouteController',
-            resolve: {
-                "ifHome": function($q, $timeout) {
-                    var tmp = $q.defer();
-                    $timeout(function(){
-                        tmp.resolve({
-                            data: function() {
-                                return "/th";
-                            }
-                        });
-                    }, 100);
-                    return tmp.promise;
-                }
-            }
+            controller : 'RouteController'
         })
         .otherwise({
             redirectTo: '/'
@@ -95,8 +56,8 @@ app.factory('InputFactory', function(){
 
 });
 
-app.controller('ChooseController', ['$rootScope', '$scope', '$location', 'InputFactory', 'ifHome', function($rootScope, $scope, $location, InputFactory, ifHome){
-    $rootScope.ifHome = ifHome.data() == "/";
+app.controller('ChooseController', ['$rootScope', '$scope', '$location', 'InputFactory', function($rootScope, $scope, $location, InputFactory){
+    $rootScope.ifHome = $location.path() == "/";
 
     $scope.submit = function() {
         if ($scope.input_origin && $scope.input_destination) {
@@ -108,7 +69,7 @@ app.controller('ChooseController', ['$rootScope', '$scope', '$location', 'InputF
 }]);
 app.controller('IndexController', ['$rootScope', '$scope', '$location', function($rootScope, $scope, $location){
     $scope.ui_lang = "th";
-    $rootScope.ifHome = "/";
+    $rootScope.ifHome = $location.path();
 
     $scope.trip_detail = {"th": "ข้อมูลการเดินทาง",
                         "en": "Trip Detail"};
@@ -120,9 +81,9 @@ app.controller('IndexController', ['$rootScope', '$scope', '$location', function
         $scope.ui_lang = $scope.ui_lang === "th" ? "en" : "th";
     };
 }]);
-app.controller("RouteController", ['$rootScope', '$scope', '$http', 'InputFactory', 'ifHome', function($rootScope, $scope, $http, InputFactory, ifHome) {
+app.controller("RouteController", ['$rootScope', '$scope', '$http', '$location', 'InputFactory', function($rootScope, $scope, $http, $location, InputFactory) {
         $scope.full_route = false;
-        $rootScope.ifHome = ifHome.data() == "/";
+        $rootScope.ifHome = $location.path() == "/";
 
         input_data = InputFactory.getInput();
 
