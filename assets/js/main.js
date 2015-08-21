@@ -124,6 +124,7 @@ app.controller("RouteController", ['$rootScope', '$scope', '$http', 'InputFactor
             $scope.response = data;
             $scope.object_route = data["object_route"];
             $scope.bts_same_line = data["BTS_same_line"];
+            $scope.stations = data["route"];
 
             $scope.arl_cnt = 0;
             $scope.bts_cnt = 0;
