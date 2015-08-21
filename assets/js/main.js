@@ -1,5 +1,5 @@
 var app = angular.module('Route', ['ngRoute', 'ngAnimate']);
-app.config(function($routeProvider) {
+app.config(function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'choose.html',
@@ -55,6 +55,11 @@ app.config(function($routeProvider) {
         .otherwise({
             redirectTo: '/'
         });
+
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
 });
 
 app.factory('InputFactory', function(){
