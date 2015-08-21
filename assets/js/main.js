@@ -94,9 +94,11 @@ app.controller('ChooseController', ['$rootScope', '$scope', '$location', 'InputF
     $rootScope.ifHome = ifHome.data() == "/";
 
     $scope.submit = function() {
-        InputFactory.setOrigin($scope.input_origin);
-        InputFactory.setDestination($scope.input_destination);
-        $location.path('th');
+        if ($scope.input_origin && $scope.input_destination) {
+            InputFactory.setOrigin($scope.input_origin);
+            InputFactory.setDestination($scope.input_destination);
+            $location.path('th');
+        };
     };
 }]);
 app.controller('IndexController', ['$rootScope', '$scope', '$location', function($rootScope, $scope, $location){
