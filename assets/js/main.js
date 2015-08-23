@@ -56,8 +56,19 @@ app.factory('InputFactory', function(){
 
 });
 
-app.controller('ChooseController', ['$rootScope', '$scope', '$location', 'InputFactory', function($rootScope, $scope, $location, InputFactory){
+app.controller('ChooseController', ['$rootScope', '$scope', '$location', '$http', 'InputFactory', function($rootScope, $scope, $location, $http, InputFactory){
     $rootScope.ifHome = $location.path() == "/";
+
+    var res = $http({
+            method: "GET",
+            url: "http://127.0.0.1:8000/getsystem"
+        });
+    res.success(function(data, status, headers, config) {
+        $scope.systems = data;
+        });
+    res.error(function(data, status, headers, config) {
+        alert(JSON.stringify({data: data}));
+    });
 
     $scope.submit = function() {
         if ($scope.input_origin && $scope.input_destination) {
