@@ -75,6 +75,15 @@
 
     </div>
 
+
+    <footer class="footer" ng-show="ifHome">
+      <div class="container">
+        <div class="text-center">
+          <p ng-click="toggleLang()" class="btn btn-default btn-md">{{change_lang[ui_lang]}}</p>
+        </div>
+      </div>
+    </footer>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="assets/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -3,8 +3,17 @@ body {
 	padding-top: 70px;
 	color: #666;
 	-webkit-font-feature-settings: 'tnum';
--moz-font-feature-settings: 'tnum';
--ms-font-feature-settings: 'tnum';
+    -moz-font-feature-settings: 'tnum';
+    -ms-font-feature-settings: 'tnum';
+}
+
+
+.footer {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
 }
 
 .navbar-brand {

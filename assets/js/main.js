@@ -59,6 +59,9 @@ app.factory('InputFactory', function(){
 app.controller('ChooseController', ['$rootScope', '$scope', '$location', '$http', 'InputFactory', function($rootScope, $scope, $location, $http, InputFactory){
     $rootScope.ifHome = $location.path() == "/";
 
+    $scope.calc_route = {"th": "คำนวณเส้นทาง",
+                        "en": "Calculate route"};
+
     var res = $http({
             method: "GET",
             url: "http://127.0.0.1:8000/getsystem"
@@ -71,15 +74,21 @@ app.controller('ChooseController', ['$rootScope', '$scope', '$location', '$http'
     });
 
     $scope.submit = function() {
+        console.log($rootScope.ui_lang);
         if ($scope.input_origin && $scope.input_destination) {
             InputFactory.setOrigin($scope.input_origin);
             InputFactory.setDestination($scope.input_destination);
-            $location.path('th');
+            if ($rootScope.ui_lang === "th") {
+                $location.path('/th');
+            } else {
+                $location.path('/en');
+            };
+
         };
     };
 }]);
 app.controller('IndexController', ['$rootScope', '$scope', '$location', function($rootScope, $scope, $location){
-    $scope.ui_lang = "th";
+    $rootScope.ui_lang = "th";
     $rootScope.ifHome = $location.path();
 
     $scope.trip_detail = {"th": "ข้อมูลการเดินทาง",
@@ -88,8 +97,11 @@ app.controller('IndexController', ['$rootScope', '$scope', '$location', function
     $scope.edit_trip = {"th": "เปลี่ยนเส้นทาง",
                         "en": "Edit Trip"};
 
+    $scope.change_lang = {"th": "Change Language",
+                        "en": "เปลี่ยนภาษา"};
+
     $scope.toggleLang = function() {
-        $scope.ui_lang = $scope.ui_lang === "th" ? "en" : "th";
+        $rootScope.ui_lang = $rootScope.ui_lang === "th" ? "en" : "th";
     };
 }]);
 app.controller("RouteController", ['$rootScope', '$scope', '$http', '$location', 'InputFactory', function($rootScope, $scope, $http, $location, InputFactory) {
