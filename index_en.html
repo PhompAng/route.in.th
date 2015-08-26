@@ -29,7 +29,11 @@
       <h2>Station Map</h2>
       <div ng-repeat="station in object_route" ng-show="full_route || $first || $last || stations[$index][0] != stations[$index+1][0] || stations[$index][0] != stations[$index-1][0] || (station['code']=='BCEN' && !bts_same_line)">
         <div class="station">
-          <div class="icon"><img class="img-circle" src="http://placehold.it/50x50" alt=""></div>
+          <div class="icon">
+            <img class="img-circle" src="assets/arl.png" ng-if="station['code'][0] == 'A'" style="width: 50px" alt="">
+            <img class="img-circle" src="assets/bts.png" ng-if="station['code'][0] == 'B'" style="width: 50px" alt="">
+            <img class="img-circle" src="assets/mrt.png" ng-if="station['code'][0] == 'M'" style="width: 50px" alt="">
+          </div>
           <span class="station-name text-dark-green">{{station["name"]["en"]}} <span ng-if="station['code'][0] == 'B'">({{station["line"]["en"]}} Line)</span> ({{station["code"]}})</span>
           <span class="direction">End: {{station["heading"]["en"]}}</span>
           <div class="clearfix"></div>
