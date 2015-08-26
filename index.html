@@ -93,5 +93,11 @@
     <script src="https://code.angularjs.org/1.4.4/angular-route.min.js"></script>
     <script src="https://code.angularjs.org/1.4.4/angular-animate.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+      $(document).on("click", '#fare-breakdown-toggle', function(){
+        $(this).find('.fa').toggleClass('fa-caret-up fa-caret-down');
+        $('.fare-breakdown').slideToggle();
+      });
+    </script>
   </body>
 </html>
