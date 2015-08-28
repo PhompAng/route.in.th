@@ -42,7 +42,8 @@
         <div class="connecting ride" ng-if="!full_route && !$last && stations[$index][0] == stations[$index+1][0]">{{station["station_cnt"]}} สถานี</div>
         <div class="connecting change" ng-if="!$last && stations[$index][0] != stations[$index+1][0]">เปลี่ยนระบบ</div>
       </div>
-      <span class="card-detail-toggle text-center" ng-click="toggleRoute()">แสดงสถานีระหว่างทางทั้งหมด</i></span>
+      <span class="card-detail-toggle text-center" ng-click="toggleRoute()" ng-if="!full_route">แสดงสถานีระหว่างทาง</i></span>
+      <span class="card-detail-toggle text-center" ng-click="toggleRoute()" ng-if="full_route">ซ่อนสถานีระหว่างทาง</i></span>
     </div>
   </div>
 </div>

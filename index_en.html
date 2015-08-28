@@ -42,7 +42,9 @@
         <div class="connecting ride" ng-if="!full_route && !$last && stations[$index][0] == stations[$index+1][0]">{{station["station_cnt"]}} stops</div>
         <div class="connecting change" ng-if="!$last && stations[$index][0] != stations[$index+1][0]">Connection</div>
       </div>
-      <span class="card-detail-toggle text-center" ng-click="toggleRoute()">Show all stops</i></span>
+
+      <span class="card-detail-toggle text-center" ng-click="toggleRoute()" ng-if="!full_route">Show all stops</i></span>
+      <span class="card-detail-toggle text-center" ng-click="toggleRoute()" ng-if="full_route">Hide all stops</i></span>
     </div>
   </div>
 </div>
