@@ -62,23 +62,13 @@ app.controller('ChooseController', ['$rootScope', '$scope', '$location', '$http'
     $scope.calc_route = {"th": "คำนวณเส้นทาง",
                         "en": "Calculate route"};
 
-    $scope.btn_disabled = true;
-
-    $scope.update_btn = function() {
-        if ($scope.input_origin && $scope.input_destination) {
-            $scope.btn_disabled = $scope.input_origin === $scope.input_destination ? true:false;
-        } else {
-            $scope.btn_disabled = true;
-        };
-    };
-
     var res = $http({
             method: "GET",
             url: "http://127.0.0.1:8000/getsystem"
         });
     res.success(function(data, status, headers, config) {
         $scope.systems = data;
-        });
+    });
     res.error(function(data, status, headers, config) {
         alert(JSON.stringify({data: data}));
     });

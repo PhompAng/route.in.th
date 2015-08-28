@@ -57,15 +57,14 @@
           <span class="icon-bar"></span>
         </button>
         <span class="navbar-brand">
-          <i class="fa fa-circle"></i> {{trip_detail[ui_lang]}}
+          <i class="fa fa-circle"></i> <span ng-bind="trip_detail[ui_lang]"></span>
         </span>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
-          <li><a id="start-over-btn" class="btn btn-default btn-xs" href="/">
-            {{edit_trip[ui_lang]}}
+          <li><a id="start-over-btn" class="btn btn-default btn-xs" href="/" ng-bind="edit_trip[ui_lang]">
           </a></li>
           <li><a id="start-over-btn" ng-click="toggleLang()" href="/{{ui_lang}}" class="btn btn-default btn-xs">TH/EN</a></li>
         </ul>
@@ -82,7 +81,7 @@
     <footer class="footer" ng-show="ifHome">
       <div class="container">
         <div class="text-center">
-          <p ng-click="toggleLang()" class="btn btn-default btn-md" id="toggleLang">{{change_lang[ui_lang]}}</p>
+          <p ng-click="toggleLang()" class="btn btn-default btn-md" id="toggleLang" ng-bind="change_lang[ui_lang]"></p>
         </div>
       </div>
     </footer>

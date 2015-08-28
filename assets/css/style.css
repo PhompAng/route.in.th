@@ -7,7 +7,6 @@ body {
     -ms-font-feature-settings: 'tnum';
 }
 
-
 .footer {
   position: absolute;
   bottom: 0px;
@@ -191,13 +190,6 @@ small {
 
 .connecting.change {
 	border-style: dotted;
-}
-
-//Front page
-.front-page.container {
-	text-align: center;
-	display: table-cell;
-	vertical-align: middle;
 }
 
 .logo {
