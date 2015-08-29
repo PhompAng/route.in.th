@@ -2,15 +2,15 @@ var app = angular.module('Route', ['ngRoute', 'ngAnimate']);
 app.config(function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'choose.html',
+            templateUrl: '/choose.html',
             controller: 'ChooseController'
         })
         .when('/th', {
-            templateUrl: 'index_th.html',
+            templateUrl: '/index_th.html',
             controller : 'RouteController'
         })
         .when('/en', {
-            templateUrl: 'index_en.html',
+            templateUrl: '/index_en.html',
             controller : 'RouteController'
         })
         .otherwise({
@@ -26,7 +26,7 @@ app.config(function($routeProvider, $locationProvider) {
 app.factory('InputFactory', function(){
     var input_data = {
             method: "POST",
-            url: "http://127.0.0.1:8000/calculate",
+            url: "api.route.in.th/public/calculate",
             data: {
                     origin: "A1",
                     destination: "BW1",
@@ -64,7 +64,7 @@ app.controller('ChooseController', ['$rootScope', '$scope', '$location', '$http'
 
     var res = $http({
             method: "GET",
-            url: "http://127.0.0.1:8000/getsystem"
+            url: "api.route.in.th/public/getsystem"
         });
     res.success(function(data, status, headers, config) {
         $scope.systems = data;
