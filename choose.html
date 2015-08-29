@@ -8,7 +8,7 @@
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <select ng-model="origin_system" name="origin-system" class="form-control" id="origin-system-selector">
               <option></option>
-              <option ng-repeat="system in systems" ng-bind="system.name" value="{{$index}}"></option>
+              <option ng-repeat="system in systems" ng-bind="system.name" value="{{$index}}" ng-selected="{{$first}}"></option>
             </select>
           </div>
           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -25,7 +25,7 @@
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <select ng-model="destination_system" name="destination-system" class="form-control" id="destination-system-selector">
               <option></option>
-              <option ng-repeat="system in systems" ng-bind="system.name" value="{{$index}}"></option>
+              <option ng-repeat="system in systems" ng-bind="system.name" value="{{$index}}" ng-selected="{{$first}}"></option>
             </select>
           </div>
           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -46,7 +46,7 @@
 
 <script type="text/javascript">
   $('#origin-system-selector').select2({
-    placeholder: "เลือกระบบต้นทาง",
+    placeholder: "ARL",
     minimumResultsForSearch: Infinity
   });
   $('#origin-selector').select2({
@@ -54,7 +54,7 @@
   });
 
   $('#destination-system-selector').select2({
-    placeholder: "เลือกระบบปลายทาง",
+    placeholder: "ARL",
     minimumResultsForSearch: Infinity
   });
   $('#destination-selector').select2({
@@ -64,11 +64,11 @@
 
   $(document).on("click", '#toggleLang', function(){
     $('#origin-selector').select2('destroy').select2({
-      placeholder: "เลือกสถานีต้นทาง"
+      placeholder: "ARL"
     });
 
     $('#destination-selector').select2('destroy').select2({
-      placeholder: "เลือกสถานีปลายทาง"
+      placeholder: "ARL"
     });
   })
 </script>

@@ -62,6 +62,9 @@ app.controller('ChooseController', ['$rootScope', '$scope', '$location', '$http'
     $scope.calc_route = {"th": "คำนวณเส้นทาง",
                         "en": "Calculate route"};
 
+    $scope.origin_system = '0';
+    $scope.destination_system = '0';
+
     var res = $http({
             method: "GET",
             url: "api/public/getsystem"
