@@ -233,7 +233,8 @@ h1.logo {
   font-weight: bold;
 }
 .select2-container .select2-selection--single .select2-selection__rendered {
-	overflow: visible;
+	/*overflow: visible; */
+    text-overflow: ellipsis;
 }
 .select2-container--default.select2-container--open {
   border-color: #3c8dbc;
