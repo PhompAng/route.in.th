@@ -26,7 +26,7 @@ app.config(function($routeProvider, $locationProvider) {
 app.factory('InputFactory', function(){
     var input_data = {
             method: "POST",
-            url: "api.route.in.th/public/calculate",
+            url: "api/public/calculate",
             data: {
                     origin: "A1",
                     destination: "BW1",
@@ -64,7 +64,7 @@ app.controller('ChooseController', ['$rootScope', '$scope', '$location', '$http'
 
     var res = $http({
             method: "GET",
-            url: "api.route.in.th/public/getsystem"
+            url: "api/public/getsystem"
         });
     res.success(function(data, status, headers, config) {
         $scope.systems = data;
