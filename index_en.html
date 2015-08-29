@@ -34,7 +34,7 @@
             <img class="img-circle" src="assets/bts.png" ng-if="station['code'][0] == 'B'" style="width: 50px" alt="">
             <img class="img-circle" src="assets/mrt.png" ng-if="station['code'][0] == 'M'" style="width: 50px" alt="">
           </div>
-          <span class="station-name text-dark-green">{{station["name"]["en"]}} <span ng-if="station['code'][0] == 'B'">({{station["line"]["en"]}} Line)</span> ({{station["code"]}})</span>
+          <span class="station-name text-dark-green">{{station["name"]["en"]}} <span ng-if="station['code'][0] == 'B'">({{station["line"]["en"]}} Line)</span></span>
           <span class="direction">End: {{station["heading"]["en"]}}</span>
           <div class="clearfix"></div>
         </div>
