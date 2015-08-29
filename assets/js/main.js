@@ -73,6 +73,8 @@ app.controller('ChooseController', ['$rootScope', '$scope', '$location', '$http'
 
     $scope.origin_system = '0';
     $scope.destination_system = '1';
+    $scope.input_origin = "A1";
+    $scope.input_destination = "BN8";
 
     var res = $http({
             method: "GET",
