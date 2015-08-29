@@ -23,6 +23,15 @@ app.config(function($routeProvider, $locationProvider) {
     });
 });
 
+app.directive('onLastRepeat', function(){
+    // Runs during compile
+    return function(scope, iElm, iAttrs) {
+            if(scope.$last) setTimeout(function() {
+                scope.$emit('onLastRepeat', iElm, iAttrs);
+            }, 1);
+        };
+});
+
 app.factory('InputFactory', function(){
     var input_data = {
             method: "POST",
@@ -63,7 +72,7 @@ app.controller('ChooseController', ['$rootScope', '$scope', '$location', '$http'
                         "en": "Calculate route"};
 
     $scope.origin_system = '0';
-    $scope.destination_system = '0';
+    $scope.destination_system = '1';
 
     var res = $http({
             method: "GET",
@@ -74,6 +83,24 @@ app.controller('ChooseController', ['$rootScope', '$scope', '$location', '$http'
     });
     res.error(function(data, status, headers, config) {
         alert(JSON.stringify({data: data}));
+    });
+
+    $scope.$on('onLastRepeat', function(scope, iElm, iAttrs) {
+        $('#origin-system-selector').select2({
+            placeholder: "ARL",
+            minimumResultsForSearch: Infinity
+        });
+        $('#origin-selector').select2({
+            placeholder: "เลือกสถานีต้นทาง"
+        });
+
+        $('#destination-system-selector').select2({
+            placeholder: "ARL",
+            minimumResultsForSearch: Infinity
+        });
+        $('#destination-selector').select2({
+            placeholder: "เลือกสถานีปลายทาง"
+        });
     });
 
     $scope.submit = function() {
