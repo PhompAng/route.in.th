@@ -96,7 +96,7 @@
     <script src="/assets/js/angular-animate.min.js"></script>
     <script src="/assets/js/main.js"></script>
     <script>
-      $(document).on("click", '#fare-breakdown-toggle', function(){
+      $(document).on("click touchstart", '#fare-breakdown-toggle', function(){
         $(this).find('.fa').toggleClass('fa-caret-up fa-caret-down');
         $('.fare-breakdown').slideToggle();
       });
