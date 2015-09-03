@@ -24,27 +24,6 @@
       <script src="/assets/js/html5shiv.min.js"></script>
       <script src="/assets/js/respond.min.js"></script>
     <![endif]-->
-    <style>
-      .viewAnimate.ng-enter{
-        -webkit-transition:all 1s ease 0.7s;
-        transition:all 1s ease 0.7s;
-      }
-
-      .viewAnimate.ng-leave {
-        -webkit-transition: all 0.5s ease 0s;
-        transition: all 0.5s ease 0s;
-      }
-
-      .viewAnimate.ng-enter,
-      .viewAnimate.ng-leave.ng-leave-active {
-        opacity:0;
-      }
-
-      .viewAnimate.ng-leave,
-      .viewAnimate.ng-enter.ng-enter-active {
-        opacity:1;
-      }
-    </style>
   </head>
   <body ng-app="Route" ng-controller="IndexController">
     <nav class="navbar navbar-green" role="navigation" ng-hide="ifHome">

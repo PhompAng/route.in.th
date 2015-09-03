@@ -3,8 +3,8 @@ body {
 	/*padding-top: 70px;*/
 	color: #666;
 	-webkit-font-feature-settings: 'tnum';
-    -moz-font-feature-settings: 'tnum';
-    -ms-font-feature-settings: 'tnum';
+	-moz-font-feature-settings: 'tnum';
+	-ms-font-feature-settings: 'tnum';
 }
 
 .footer {
@@ -210,6 +210,26 @@ h1.logo {
 	width: 100%;
 }
 
+.viewAnimate.ng-enter{
+	-webkit-transition:all 1s ease 0.7s;
+	transition:all 1s ease 0.7s;
+}
+
+.viewAnimate.ng-leave {
+	-webkit-transition: all 0.5s ease 0s;
+	transition: all 0.5s ease 0s;
+}
+
+.viewAnimate.ng-enter,
+.viewAnimate.ng-leave.ng-leave-active {
+	opacity:0;
+}
+
+.viewAnimate.ng-leave,
+.viewAnimate.ng-enter.ng-enter-active {
+	opacity:1;
+}
+
 /*
  * Plugin: Select2
  * ---------------
@@ -234,7 +254,7 @@ h1.logo {
 }
 .select2-container .select2-selection--single .select2-selection__rendered {
 	/*overflow: visible; */
-    text-overflow: ellipsis;
+	text-overflow: ellipsis;
 }
 .select2-container--default.select2-container--open {
   border-color: #3c8dbc;
