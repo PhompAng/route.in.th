@@ -15,9 +15,9 @@
       <span class="fare text-dark-green">{{response["fare"]["total"]}} บาท</span>
       <span id="fare-breakdown-toggle" class="card-detail-toggle">รายละเอียดค่าโดยสาร<i class="fa fa-caret-down"></i></span>
       <ul class="fare-breakdown">
-        <li ng-hide="arl_cnt == 0">ARL {{arl_cnt}} สถานี <small>({{response["card_type_arl"]["th"]}})</small><span class="fare">{{response["fare"]["ARL"]}} บาท</span></li>
-        <li ng-hide="bts_cnt == 0">BTS {{bts_cnt}} สถานี <small>({{response["card_type_bts"]["th"]}})</small><span class="fare">{{response["fare"]["BTS"]}} บาท</span></li>
-        <li ng-hide="mrt_cnt == 0">MRT {{mrt_cnt}} สถานี <small>({{response["card_type_mrt"]["th"]}})</small><span class="fare">{{response["fare"]["MRT"]}} บาท</span></li>
+        <li ng-hide="response['fare']['ARL'] == 0">ARL {{arl_cnt}} สถานี <small>({{response["card_type_arl"]["th"]}})</small><span class="fare">{{response["fare"]["ARL"]}} บาท</span></li>
+        <li ng-hide="response['fare']['BTS'] == 0">BTS {{bts_cnt}} สถานี <small>({{response["card_type_bts"]["th"]}})</small><span class="fare">{{response["fare"]["BTS"]}} บาท</span></li>
+        <li ng-hide="response['fare']['MRT'] == 0">MRT {{mrt_cnt}} สถานี <small>({{response["card_type_mrt"]["th"]}})</small><span class="fare">{{response["fare"]["MRT"]}} บาท</span></li>
       </ul>
     </div>
   </div>

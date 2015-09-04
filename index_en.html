@@ -15,9 +15,9 @@
       <span class="fare text-dark-green en">{{response["fare"]["total"]}} Baht</span>
       <span id="fare-breakdown-toggle" class="card-detail-toggle">Fare Breakdown<i class="fa fa-caret-down"></i></span>
       <ul class="fare-breakdown">
-        <li ng-hide="arl_cnt == 0">ARL {{arl_cnt}} Stops <small>({{response["card_type_arl"]["en"]}})</small><span class="fare">{{response["fare"]["ARL"]}} Baht</span></li>
-        <li ng-hide="bts_cnt == 0">BTS {{bts_cnt}} Stops <small>({{response["card_type_bts"]["en"]}})</small><span class="fare">{{response["fare"]["BTS"]}} Baht</span></li>
-        <li ng-hide="mrt_cnt == 0">MRT {{mrt_cnt}} Stops <small>({{response["card_type_mrt"]["en"]}})</small><span class="fare">{{response["fare"]["MRT"]}} Baht</span></li>
+        <li ng-hide="response['fare']['ARL'] == 0">ARL {{arl_cnt}} Stops <small>({{response["card_type_arl"]["en"]}})</small><span class="fare">{{response["fare"]["ARL"]}} Baht</span></li>
+        <li ng-hide="response['fare']['BTS'] == 0">BTS {{bts_cnt}} Stops <small>({{response["card_type_bts"]["en"]}})</small><span class="fare">{{response["fare"]["BTS"]}} Baht</span></li>
+        <li ng-hide="response['fare']['MRT'] == 0">MRT {{mrt_cnt}} Stops <small>({{response["card_type_mrt"]["en"]}})</small><span class="fare">{{response["fare"]["MRT"]}} Baht</span></li>
       </ul>
     </div>
   </div>
