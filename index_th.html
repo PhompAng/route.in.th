@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="card">
+      <span class="origin-title text-dark-green">ต้นทาง</span>{{response["origin"]["th"]}}
+      <div class="card-divider"></div>
+      <span class="destination-title text-dark-green">ปลายทาง</span>{{response["destination"]["th"]}}
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="card">
+      <h2>ค่าโดยสาร</h2>
+      <span class="fare text-dark-green">{{response["fare"]["total"]}} บาท</span>
+      <span id="fare-breakdown-toggle" class="card-detail-toggle">รายละเอียดค่าโดยสาร<i class="fa fa-caret-down"></i></span>
+      <ul class="fare-breakdown">
+        <li ng-hide="response['fare']['ARL'] == 0">ARL {{arl_cnt}} สถานี <small>({{response["card_type_arl"]["th"]}})</small><span class="fare">{{response["fare"]["ARL"]}} บาท</span></li>
+        <li ng-hide="response['fare']['BTS'] == 0">BTS {{bts_cnt}} สถานี <small>({{response["card_type_bts"]["th"]}})</small><span class="fare">{{response["fare"]["BTS"]}} บาท</span></li>
+        <li ng-hide="response['fare']['MRT'] == 0">MRT {{mrt_cnt}} สถานี <small>({{response["card_type_mrt"]["th"]}})</small><span class="fare">{{response["fare"]["MRT"]}} บาท</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="card">
+      <h2>การเดินทาง</h2>
+      <div ng-repeat="station in object_route" ng-show="full_route || $first || $last || stations[$index][0] != stations[$index+1][0] || stations[$index][0] != stations[$index-1][0] || (station['code']=='BCEN' && !bts_same_line)">
+        <div class="station">
+          <div class="icon">
+            <img class="img-circle" src="assets/arl.png" ng-if="station['code'][0] == 'A'" style="width: 50px" alt="">
+            <img class="img-circle" src="assets/bts.png" ng-if="station['code'][0] == 'B'" style="width: 50px" alt="">
+            <img class="img-circle" src="assets/mrt.png" ng-if="station['code'][0] == 'M'" style="width: 50px" alt="">
+          </div>
+          <span class="station-name text-dark-green">{{station["name"]["th"]}} <span ng-if="station['code'][0] == 'B'">(สาย{{station["line"]["th"]}})</span><span style="color: #aaa;"> ({{station["code"]}})</span></span>
+          <span class="direction">ปลายทาง: {{station["heading"]["th"]}}</span>
+          <div class="clearfix"></div>
+        </div>
+        <div class="connecting ride" ng-if="full_route && !$last && stations[$index][0] == stations[$index+1][0]">1 สถานี</div>
+        <div class="connecting ride" ng-if="!full_route && !$last && stations[$index][0] == stations[$index+1][0]">{{station["station_cnt"]}} สถานี</div>
+        <div class="connecting change" ng-if="!$last && stations[$index][0] != stations[$index+1][0]">เปลี่ยนระบบ</div>
+      </div>
+      <span class="card-detail-toggle text-center" ng-click="toggleRoute()" ng-if="!full_route">แสดงสถานีระหว่างทาง</i></span>
+      <span class="card-detail-toggle text-center" ng-click="toggleRoute()" ng-if="full_route">ซ่อนสถานีระหว่างทาง</i></span>
+    </div>
+  </div>
+</div>

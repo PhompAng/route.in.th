@@ -1,0 +1,161 @@
+header, main, footer {
+  padding-left: 240px;
+}
+
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+  height: 80px;
+  line-height: 80px;
+}
+
+nav {
+  padding-left: 20px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+
+  nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 50px;
+    line-height: 50px;
+  }
+
+  nav .brand-logo {
+    font-size: 1.5rem;
+  }
+
+  nav {
+    padding-left: 10px;
+  }
+
+}
+
+ul.side-nav.fixed li a {
+  font-size: 13px;
+  line-height: 44px;
+  height: 44px;
+  padding: 0 30px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.side-nav li {
+  padding: 0;
+}
+
+ul.side-nav.fixed li.logo {
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  line-height: 0;
+}
+
+ul.side-nav.fixed li.logo:hover {
+  background: #fff;
+}
+
+ul.side-nav.fixed li.logo > img {
+  width: 100%;
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(160, 160, 160, 0.2);
+  padding: 10px 10px 10px 15px;
+}
+
+.card-header .card-tool {
+  float: right;
+  padding-top: 4px;
+}
+
+.card-header .card-tool a .material-icons {
+  font-size: 22px;
+}
+
+.card .card-content {
+  padding: 15px;
+}
+
+.card .card-title {
+  font-size: 20px;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.card-action.no-padding > .btn-block {
+  height: 40px;
+  line-height: 40px;
+  border-radius: 0;
+  text-transform: none;
+  padding-left: 15px;
+}
+
+.card-action.no-padding > .btn-block:active {
+  background: #2196f3;
+  color: #fff !important;
+}
+
+.material-icons.left {
+  margin-right: 8px;
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}
+
+.input-field label {
+  left: 0;
+}
+
+.divider {
+  border-bottom: 1px solid rgba(160, 160, 160, 0.2);
+  left: -15px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.collapsible-body p {
+  padding: 5px 15px;
+}
+
+p {
+  color: rgba(0, 0, 0, 0.709804);
+}
+
+input {
+  color: rgba(0, 0, 0, 0.709804);
+}
+
+.modal .modal-content {
+  padding: 15px;
+}
+
+.radio-group {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label { 
+  padding-left:27px;
+}
+
+.modal .modal-content h6:not(:first-child) {
+  margin-top: 20px;
+}
+
+nav .button-collapse i {
+  font-size: 2rem;
+}

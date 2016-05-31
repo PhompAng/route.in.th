@@ -1,87 +1,166 @@
-$.getScript("assets/js/dict.js", function(){});
+var app = angular.module('Route', ['ngRoute', 'ngAnimate']);
+app.config(function($routeProvider, $locationProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: '/choose.html',
+            controller: 'ChooseController'
+        })
+        .when('/th', {
+            templateUrl: '/index_th.html',
+            controller : 'RouteController'
+        })
+        .when('/en', {
+            templateUrl: '/index_en.html',
+            controller : 'RouteController'
+        })
+        .otherwise({
+            redirectTo: '/'
+        });
 
-var app = angular.module("Route", []);
-app.controller(
-    "RouteController", ['$scope', '$http', function($scope, $http) {
-        $scope.full_route = true;
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
+});
 
-        var aaa = {
+app.directive('onLastRepeat', function(){
+    // Runs during compile
+    return function(scope, iElm, iAttrs) {
+            if(scope.$last) setTimeout(function() {
+                scope.$emit('onLastRepeat', iElm, iAttrs);
+            }, 1);
+        };
+});
+
+app.factory('InputFactory', function(){
+    var input_data = {
             method: "POST",
-            url: "http://127.0.0.1:8000/calculate",
+            url: "api/public/calculate",
             data: {
                     origin: "A1",
-                    destination: "BE2",
+                    destination: "BW1",
                     card_type_bts: "0",
                     card_type_mrt: "0",
                     card_type_arl: "0"
                 }
         };
-        var res = $http(aaa);
+
+    var setOrigin = function(origin) {
+        input_data["data"]["origin"] = origin;
+    };
+
+    var setDestination = function(destination) {
+        input_data["data"]["destination"] = destination;
+    };
+
+    var getInput = function() {
+        return input_data;
+    };
+
+    return {
+        setOrigin: setOrigin,
+        setDestination: setDestination,
+        getInput: getInput
+    };
+
+});
+
+app.controller('ChooseController', ['$rootScope', '$scope', '$location', '$http', 'InputFactory', function($rootScope, $scope, $location, $http, InputFactory){
+    $rootScope.ifHome = $location.path() == "/";
+
+    $scope.calc_route = {"th": "คำนวณเส้นทาง",
+                        "en": "Calculate route"};
+
+    $scope.origin_system = '0';
+    $scope.destination_system = '1';
+    $scope.input_origin = "A1";
+    $scope.input_destination = "BN8";
+
+    var res = $http({
+            method: "GET",
+            url: "api/public/getsystem"
+        });
+    res.success(function(data, status, headers, config) {
+        $scope.systems = data;
+    });
+    res.error(function(data, status, headers, config) {
+        alert(JSON.stringify({data: data}));
+    });
+
+    $scope.$on('onLastRepeat', function(scope, iElm, iAttrs) {
+        $('#origin-system-selector').select2({
+            placeholder: "ARL",
+            minimumResultsForSearch: Infinity
+        });
+        $('#origin-selector').select2({
+            placeholder: "เลือกสถานีต้นทาง"
+        });
+
+        $('#destination-system-selector').select2({
+            placeholder: "ARL",
+            minimumResultsForSearch: Infinity
+        });
+        $('#destination-selector').select2({
+            placeholder: "เลือกสถานีปลายทาง"
+        });
+    });
+
+    $scope.submit = function() {
+        InputFactory.setOrigin($scope.input_origin);
+        InputFactory.setDestination($scope.input_destination);
+        if ($rootScope.ui_lang === "th") {
+            $location.path('/th');
+        } else {
+            $location.path('/en');
+        };
+    };
+}]);
+app.controller('IndexController', ['$rootScope', '$scope', '$location', function($rootScope, $scope, $location){
+    $rootScope.ui_lang = "th";
+    $rootScope.ifHome = $location.path();
+
+    $scope.trip_detail = {"th": "ข้อมูลการเดินทาง",
+                        "en": "Trip Detail"};
+
+    $scope.edit_trip = {"th": "เปลี่ยนเส้นทาง",
+                        "en": "Edit Trip"};
+
+    $scope.change_lang = {"th": "Change Language",
+                        "en": "เปลี่ยนภาษา"};
+
+    $scope.toggleLang = function() {
+        $rootScope.ui_lang = $rootScope.ui_lang === "th" ? "en" : "th";
+    };
+}]);
+app.controller("RouteController", ['$rootScope', '$scope', '$http', '$location', 'InputFactory', function($rootScope, $scope, $http, $location, InputFactory) {
+        $scope.full_route = false;
+        $rootScope.ifHome = $location.path() == "/";
+
+        input_data = InputFactory.getInput();
+
+        var res = $http(input_data);
         res.success(function(data, status, headers, config) {
-            console.log(data);
-            $scope.stations = data["route"];
-            $scope.station_name = station_name;
-
             $scope.response = data;
-            $scope.origin = data["origin"];
-            $scope.destination = data["destination"];
+            $scope.object_route = data["object_route"];
+            $scope.bts_same_line = data["BTS_same_line"];
+            $scope.stations = data["route"];
 
-            var station_cnt = {};
-            arl_cnt = 0;
-            bts_cnt = 0;
-            mrt_cnt = 0;
-            station_cnt[data["route"][0]] = 0;
-            $scope.same_line = false;
-            var tmp = data["route"][0];
+            $scope.arl_cnt = 0;
+            $scope.bts_cnt = 0;
+            $scope.mrt_cnt = 0;
 
             $.each(data["route"], function(i, val) {
                 if (val.indexOf("A") > -1) {
-                    arl_cnt += 1;
+                    $scope.arl_cnt += 1;
                 } else if (val.indexOf("B") > -1) {
-                    bts_cnt += 1;
+                    $scope.bts_cnt += 1;
                 } else if (val.indexOf("M") > -1) {
-                    mrt_cnt += 1;
+                    $scope.mrt_cnt += 1;
                 }
-
-                if (typeof data["route"][i+1] == "undefined") {
-                    return;
-                };
-                console.log(data["route"][i]);
-                if (data["route"][i+1] === "BCEN") {
-                    if (typeof data["route"][i+2] == "undefined") {
-                        return;
-                    };
-                    if (data["route"][i][1] == "N" && data["route"][i+2][1] == "E") {
-                        station_cnt[tmp] += 1;
-                    } else if (data["route"][i][1] == "E" && data["route"][i+2][1] == "N") {
-                        station_cnt[tmp] += 1;
-                    } else if (data["route"][i][1] == "W" && data["route"][i+2][1] == "S") {
-                        station_cnt[tmp] += 1;
-                    } else if (data["route"][i][1] == "S" && data["route"][i+2][1] == "W") {
-                        station_cnt[tmp] += 1;
-                    } else {
-                        station_cnt[tmp] += 1;
-                        station_cnt["BCEN"] = 0;
-                        tmp = data["route"][i+1];
-                        $scope.same_line = true;
-                    }
-                } else if (data["route"][i][0] === data["route"][i+1][0]) {
-                    station_cnt[tmp] += 1;
-                } else {
-                    station_cnt[data["route"][i+1]] = 0;
-                    tmp = data["route"][i+1];
-                }
-                console.log(station_cnt);
             });
-
-            $scope.station_cnt = station_cnt;
-            $scope.arl_cnt = arl_cnt;
-            $scope.bts_cnt = bts_cnt;
-            $scope.mrt_cnt = mrt_cnt;
-
         });
         res.error(function(data, status, headers, config) {
-            $scope.response = JSON.stringify({data: data});
+            alert(JSON.stringify({data: data}));
         });
 
         $scope.toggleRoute = function() {

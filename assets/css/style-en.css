@@ -1,3 +1,9 @@
+* {
+	-webkit-font-feature-settings: 'pnum';
+	-moz-font-feature-settings: 'pnum';
+	-ms-font-feature-settings: 'pnum';
+}
+
 body {
 	font-family: "Aller";
 	font-size: 1.1em;
